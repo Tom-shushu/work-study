@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.bytedeco:libfreenect:linux-x86_64:0.5.7-1.5.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/SoftWare/Maven/repository/org/bytedeco/libfreenect/0.5.7-1.5.5/libfreenect-0.5.7-1.5.5-linux-x86_64.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/SoftWare/Maven/repository/org/bytedeco/libfreenect/0.5.7-1.5.5/libfreenect-0.5.7-1.5.5-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/SoftWare/Maven/repository/org/bytedeco/libfreenect/0.5.7-1.5.5/libfreenect-0.5.7-1.5.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

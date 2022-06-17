@@ -1,0 +1,14 @@
+server:
+  port: 8080
+mqtt:
+  hostUrl: tcp://xxx.xx.xx.xxx:1883
+  username: admin
+  password: public
+  clientId: equipment_main
+  cleanSession: true
+  reconnect: true
+  timeout: 100
+  keepAlive: 100
+  defaultTopic: client:report:1
+  isOpen: true
+  qos: 1
