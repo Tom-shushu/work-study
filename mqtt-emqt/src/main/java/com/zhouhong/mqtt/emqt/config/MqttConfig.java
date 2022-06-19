@@ -2,7 +2,6 @@ package com.zhouhong.mqtt.emqt.config;
 
 import com.zhouhong.mqtt.emqt.client.MqttAcceptClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Resource;
@@ -18,7 +17,6 @@ public class MqttConfig {
     @Resource
     private MqttAcceptClient mqttAcceptClient;
 
-    @Conditional(MqttCondition.class)
     @Bean
     public MqttAcceptClient getMqttPushClient() {
         mqttAcceptClient.connect();

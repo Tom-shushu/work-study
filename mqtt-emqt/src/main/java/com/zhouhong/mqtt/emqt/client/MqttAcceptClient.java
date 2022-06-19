@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * description:
+ * description: 服务器段端连接订阅消息、监控topic
  * date: 2022/6/16 15:52
  *
  * @author: zhouhong

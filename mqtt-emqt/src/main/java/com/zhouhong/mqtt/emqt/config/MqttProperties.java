@@ -62,11 +62,6 @@ public class MqttProperties {
     private Boolean reconnect;
 
     /**
-     * 启动的时候是否关闭mqtt
-     */
-    private Boolean isOpen;
-
-    /**
      * 连接方式
      */
     private Integer qos;

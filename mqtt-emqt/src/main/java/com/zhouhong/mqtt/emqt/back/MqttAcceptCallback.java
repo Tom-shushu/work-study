@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
 /**
- * description:
+ * description: 接收消息后的回调
  * date: 2022/6/16 15:52
  *
  * @author: zhouhong
@@ -31,9 +31,9 @@ public class MqttAcceptCallback implements MqttCallbackExtended {
      */
     @Override
     public void connectionLost(Throwable throwable) {
-        log.info("连接断开，可以做重连");
+        log.info("接收消息回调:  连接断开，可以做重连");
         if (MqttAcceptClient.client == null || !MqttAcceptClient.client.isConnected()) {
-            log.info("emqx重新连接....................................................");
+            log.info("接收消息回调:  emqx重新连接....................................................");
             mqttAcceptClient.reconnection();
         }
     }
@@ -46,10 +46,8 @@ public class MqttAcceptCallback implements MqttCallbackExtended {
      */
     @Override
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-        log.info("接收消息主题 : " + topic);
-        log.info("接收消息Qos : " + mqttMessage.getQos());
-        log.info("接收消息内容 : " + new String(mqttMessage.getPayload()));
-//        int i = 1/0;
+        log.info("接收消息回调:  接收消息主题 : " + topic);
+        log.info("接收消息回调:  接收消息内容 : " + new String(mqttMessage.getPayload()));
     }
 
     /**
@@ -61,13 +59,13 @@ public class MqttAcceptCallback implements MqttCallbackExtended {
     public void deliveryComplete(IMqttDeliveryToken token) {
         String[] topics = token.getTopics();
         for (String topic : topics) {
-            log.info("向主题：" + topic + "发送消息成功！");
+            log.info("接收消息回调:  向主题：" + topic + "发送消息成功！");
         }
         try {
             MqttMessage message = token.getMessage();
             byte[] payload = message.getPayload();
             String s = new String(payload, "UTF-8");
-            log.info("消息的内容是：" + s);
+            log.info("接收消息回调:  消息的内容是：" + s);
         } catch (MqttException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -87,6 +85,6 @@ public class MqttAcceptCallback implements MqttCallbackExtended {
                 + MqttAcceptClient.client.getClientId() + "客户端连接成功！--------------------");
         // 以/#结尾表示订阅所有以test开头的主题
         // 订阅所有机构主题
-        mqttAcceptClient.subscribe("client:report:1", 0);
+        mqttAcceptClient.subscribe("topic111", 0);
     }
 }

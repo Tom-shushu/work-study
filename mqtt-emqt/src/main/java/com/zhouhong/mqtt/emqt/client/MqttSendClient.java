@@ -7,11 +7,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.UUID;
 
 /**
- * description:
+ * description: 发送消息
  * date: 2022/6/16 16:01
  *
  * @author: zhouhong
@@ -55,18 +54,16 @@ public class MqttSendClient {
      * 主题格式： server:report:$orgCode(参数实际使用机构代码)
      *
      * @param retained    是否保留
-     * @param orgCode     orgId
      * @param pushMessage 消息体
      */
-    public void publish(boolean retained, String orgCode, String pushMessage) {
+    public void publish(boolean retained, String topic, String pushMessage) {
         MqttMessage message = new MqttMessage();
         message.setQos(mqttProperties.getQos());
         message.setRetained(retained);
         message.setPayload(pushMessage.getBytes());
-        MqttDeliveryToken token;
         MqttClient mqttClient = connect();
         try {
-            mqttClient.publish("" + orgCode, message);
+            mqttClient.publish(topic, message);
         } catch (MqttException e) {
             e.printStackTrace();
         } finally {

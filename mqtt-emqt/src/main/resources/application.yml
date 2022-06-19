@@ -1,14 +1,15 @@
 server:
   port: 8080
+
 mqtt:
-  hostUrl: tcp://xxx.xx.xx.xxx:1883
+  hostUrl: tcp://mqtt.zhouhong.icu:1883
   username: admin
   password: public
-  clientId: equipment_main
+  ## 服务端 clientId (发送端自己定义)
+  clientId: service_client_id
   cleanSession: true
   reconnect: true
   timeout: 100
   keepAlive: 100
-  defaultTopic: client:report:1
-  isOpen: true
-  qos: 1
+  defaultTopic: topic111
+  qos: 0

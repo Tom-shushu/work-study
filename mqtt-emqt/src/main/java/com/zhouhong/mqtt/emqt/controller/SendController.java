@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * description:
+ * description: 发消息控制类
  * date: 2022/6/16 15:58
  *
  * @author: zhouhong
@@ -20,8 +20,6 @@ public class SendController {
 
     @PostMapping("/mqtt/sendmessage")
     public void sendMessage(@RequestBody SendParam sendParam) {
-        System.out.println("message:"+sendParam.getMessageContent());
-        mqttSendClient.publish(false,"client:report:1",sendParam.getMessageContent());
+        mqttSendClient.publish(false,sendParam.getTopic(),sendParam.getMessageContent());
     }
-
 }
