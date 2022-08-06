@@ -1,0 +1,65 @@
+server:
+  port: ${random.int(8000,8999]}
+  max-http-header-size: 10240
+spring:
+  jackson:
+    time-zone: GMT+8
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: @spring.active@
+  application:
+    name: server1
+
+logging:
+  file:
+    path: ./logs/
+
+log:
+  path: ./logs/
+
+---
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      config:
+        server-addr: https://api.zhouhong.icu
+        namespace: 4d7c95f1-21d5-43ad-a420-5eebb2473751
+        file-extension: yml
+        username: nacos
+        password: nacos
+      discovery:
+        server-addr: https://api.zhouhong.icu
+        namespace: 4d7c95f1-21d5-43ad-a420-5eebb2473751
+        username: nacos
+        password: nacos
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: https://api.zhouhong.icu
+        namespace: 07610e11-85ae-49cb-aa46-b8f0802543bd
+        file-extension: yml
+        username: nacos
+        password: nacos
+      discovery:
+        server-addr: https://api.zhouhong.icu
+        namespace: 07610e11-85ae-49cb-aa46-b8f0802543bd
+        username: nacos
+        password: nacos
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      config:
+        server-addr: https://api.zhouhong.icu
+        namespace: 01940467-9f25-45e3-b9b8-1ad25c937544
+        file-extension: yml
+        extension-configs:
+      discovery:
+        server-addr: https://api.zhouhong.icu
+        namespace: 01940467-9f25-45e3-b9b8-1ad25c937544

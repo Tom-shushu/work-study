@@ -1,0 +1,92 @@
+#请求和响应GZIP压缩支持
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+spring:
+  cloud:
+    gateway:
+      enabled: true
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "'/' + serviceId + '/(?<remaining>.*)'"
+                replacement: "'/' + serviceId + '/${remaining}'"
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+      httpclient:
+        response-timeout: 60000
+        connect-timeout: 60000
+    loadbalancer:
+      ribbon:
+        enabled: false
+  application:
+    name: gateway
+  sleuth:
+    enabled: false
+    http:
+      legacy:
+        enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  codec:
+    max-in-memory-size: 20MB
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude: heapdump,dump,threaddump,configprops,env
+
+  security:
+    enabled: false
+
+gate:
+  ignore:
+    startWith: /auth/jwt,/auth/captcha
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 ##并发执行的最大线程数，默认10
+      maxQueueSize: 1000 ##BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+            timerDelayInMilliseconds: 10000
