@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: iot-db
+  iotdb:
+    username: root
+    password: root
+    ip: 101.35.241.59
+    port: 6667
+    fetchSize: 10000
