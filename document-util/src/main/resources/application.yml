@@ -1,0 +1,17 @@
+server:
+  port: 8989
+
+## 使用自己的阿里云秘钥，目前新用户OSS都是免费的
+aliyun:
+  oss:
+    endpoint:   https://oss-cn-beijing.aliyuncs.com
+    accessKeyId: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    accessKeySecret: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+    bucketName: document-util
+
+## 请求文件大小控制
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
